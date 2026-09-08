@@ -1,0 +1,414 @@
+/* Protect Tapko — placeholder visuals. Each element is one container with a
+   solid fill, so it can be swapped for a real sprite via background-image. */
+
+.tapko-app {
+  --bg: #2b2438;
+  --body: #e8c99b;
+  --glow: #f2a65a;
+  --wolf: #4a4550;
+  --wolf-eye: #d4534c;
+  --bubble-bg: #f2a65a;
+  --bubble-text: #5a3410;
+
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 55%, #3a3049 0%, var(--bg) 70%);
+  color: #f6efe6;
+  font-family:
+    ui-rounded, "Avenir Next", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.tapko-field {
+  position: absolute;
+  inset: 0;
+}
+
+/* ---------- character ---------- */
+.tapko-mascot-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tapko-glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 200px;
+  height: 200px;
+  margin: -100px 0 0 -100px;
+  border-radius: 50%;
+  background: var(--glow);
+  opacity: 0.22;
+  filter: blur(6px);
+  animation: tapko-pulse 2.6s ease-in-out infinite;
+}
+
+.tapko-mascot {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  border-radius: 46% 46% 42% 42% / 50%;
+  background: var(--body);
+  background-size: cover;
+  background-position: center;
+  animation: tapko-sway 2.8s ease-in-out infinite;
+}
+
+.tapko-ear {
+  position: absolute;
+  top: -12px;
+  width: 22px;
+  height: 30px;
+  border-radius: 60% 60% 40% 40%;
+  background: var(--body);
+  opacity: 0.95;
+}
+.tapko-ear.left {
+  left: 6px;
+  transform: rotate(-18deg);
+}
+.tapko-ear.right {
+  right: 6px;
+  transform: rotate(18deg);
+}
+
+.tapko-eye {
+  position: absolute;
+  top: 34px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #4a3a2a;
+}
+.tapko-eye.left {
+  left: 22px;
+}
+.tapko-eye.right {
+  right: 22px;
+}
+
+.tapko-snout {
+  position: absolute;
+  left: 50%;
+  top: 50px;
+  width: 30px;
+  height: 20px;
+  margin-left: -15px;
+  border-radius: 50%;
+  background: #f5e2c4;
+}
+
+.tapko-mascot--fear {
+  animation: tapko-tremble 0.25s linear infinite;
+}
+.tapko-mascot--hit {
+  animation: tapko-shake 0.3s ease-in-out 2;
+  box-shadow: 0 0 0 8px rgba(212, 83, 76, 0.35);
+}
+.tapko-mascot--victory {
+  animation: tapko-hop 0.6s ease-in-out infinite;
+}
+.tapko-mascot--defeat {
+  animation: none;
+  transform: rotate(8deg) scale(0.94);
+  filter: saturate(0.6);
+}
+
+/* ---------- speech bubble ---------- */
+.tapko-bubble {
+  position: relative;
+  margin-bottom: 12px;
+  max-width: 60vw;
+  padding: 8px 14px;
+  border-radius: 16px;
+  background: var(--bubble-bg);
+  color: var(--bubble-text);
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  animation: tapko-pop 0.18s ease-out;
+}
+.tapko-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-radius: 3px;
+  background: var(--bubble-bg);
+  transform: rotate(45deg);
+}
+
+/* ---------- wolves ---------- */
+.tapko-wolf {
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  margin: -31px 0 0 -31px;
+  border: 0;
+  padding: 0;
+  border-radius: 50% 50% 44% 44%;
+  background: var(--wolf);
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+  transition: opacity 0.25s ease-out;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.tapko-wolf-ear {
+  position: absolute;
+  top: -8px;
+  width: 16px;
+  height: 22px;
+  border-radius: 60% 60% 30% 30%;
+  background: var(--wolf);
+}
+.tapko-wolf-ear.left {
+  left: 6px;
+  transform: rotate(-20deg);
+}
+.tapko-wolf-ear.right {
+  right: 6px;
+  transform: rotate(20deg);
+}
+.tapko-wolf-eye {
+  position: absolute;
+  top: 26px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--wolf-eye);
+  box-shadow: 0 0 6px var(--wolf-eye);
+}
+.tapko-wolf-eye.left {
+  left: 16px;
+}
+.tapko-wolf-eye.right {
+  right: 16px;
+}
+.tapko-wolf--walking {
+  animation: tapko-prowl 0.5s ease-in-out infinite;
+}
+.tapko-wolf--dying {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- HUD ---------- */
+.tapko-hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  padding: calc(env(safe-area-inset-top, 0px) + 14px) 16px
+    calc(env(safe-area-inset-bottom, 0px) + 18px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.tapko-hud-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tapko-badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 13px;
+  font-weight: 700;
+}
+.tapko-hearts {
+  display: flex;
+  gap: 6px;
+}
+.tapko-heart {
+  width: 20px;
+  height: 20px;
+  border-radius: 50% 50% 8% 50%;
+  transform: rotate(45deg);
+  background: var(--wolf-eye);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+.tapko-heart--empty {
+  opacity: 0.2;
+  transform: rotate(45deg) scale(0.8);
+}
+.tapko-hint {
+  align-self: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  font-size: 14px;
+  animation: tapko-pop 0.3s ease-out;
+}
+.tapko-timer {
+  align-self: center;
+  margin-bottom: 8px;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+/* ---------- panels ---------- */
+.tapko-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(43, 36, 56, 0.86);
+  animation: tapko-pop 0.25s ease-out;
+}
+.tapko-title {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 800;
+}
+.tapko-sub {
+  margin: 0;
+  max-width: 22rem;
+  font-size: 15px;
+  opacity: 0.8;
+}
+.tapko-btn {
+  min-width: 200px;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--glow);
+  color: var(--bubble-text);
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.tapko-btn--ghost {
+  background: transparent;
+  color: #f6efe6;
+  box-shadow: inset 0 0 0 2px rgba(246, 239, 230, 0.35);
+}
+.tapko-reward {
+  padding: 18px 22px;
+  border-radius: 20px;
+  background: rgba(242, 166, 90, 0.16);
+  box-shadow: inset 0 0 0 2px rgba(242, 166, 90, 0.5);
+}
+.tapko-code {
+  margin-top: 6px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--glow);
+}
+.tapko-divider {
+  width: 70%;
+  max-width: 18rem;
+  height: 1px;
+  background: rgba(246, 239, 230, 0.18);
+}
+.tapko-optional {
+  font-size: 12px;
+  opacity: 0.6;
+  margin: 0;
+}
+
+/* ---------- keyframes ---------- */
+@keyframes tapko-sway {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(1.5deg);
+  }
+}
+@keyframes tapko-pulse {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.08);
+  }
+}
+@keyframes tapko-tremble {
+  0%,
+  100% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+}
+@keyframes tapko-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-8px);
+  }
+  75% {
+    transform: translateX(8px);
+  }
+}
+@keyframes tapko-hop {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.04);
+  }
+}
+@keyframes tapko-prowl {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.05, 0.95);
+  }
+}
+@keyframes tapko-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tapko-app * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
