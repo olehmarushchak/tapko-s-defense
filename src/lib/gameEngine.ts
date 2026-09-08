@@ -82,7 +82,7 @@ const KNOCKBACK_TIME = 0.28;
 
 function pickLine(kind: keyof typeof LINES): string {
   const options = LINES[kind];
-  return options[Math.floor(Math.random() * options.length)];
+  return options[Math.floor(Math.random() * options.length)] ?? options[0]!;
 }
 
 export function startGame(level: LevelId): GameState {
