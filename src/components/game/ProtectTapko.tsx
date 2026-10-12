@@ -9,14 +9,12 @@ import {
   type GameState,
   type LevelId,
 } from "@/lib/gameEngine";
-import { Mascot } from "./Mascot";
-import { WolfView } from "./WolfView";
+import { businessConfig } from "@/lib/businessConfig";
+import { PixiField } from "./PixiField";
 import { Hud } from "./Hud";
 import { StartScreen } from "./StartScreen";
 import { RewardScreen } from "./RewardScreen";
 import { GameOverScreen } from "./GameOverScreen";
-
-const REWARD_CODE = "TAPKO-10";
 
 export function ProtectTapko() {
   const [state, setState] = useState<GameState>(() => initialState("easy"));
@@ -44,7 +42,11 @@ export function ProtectTapko() {
   useEffect(() => {
     if (state.status === "won" && !rewardLogged.current) {
       rewardLogged.current = true;
-      logEvent("reward_shown", { code: REWARD_CODE, level: state.level });
+      logEvent("reward_shown", {
+        rewardEnabled: businessConfig.rewardEnabled,
+        rewardText: businessConfig.rewardText,
+        level: state.level,
+      });
     }
   }, [state.status, state.level]);
 
@@ -62,12 +64,24 @@ export function ProtectTapko() {
 
   return (
     <div className="tapko-app">
-      <div className="tapko-field">
-        <Mascot state={state.mascotState} bubble={state.bubble} />
-        {state.wolves.map((wolf) => (
-          <WolfView key={wolf.id} wolf={wolf} onHit={onHit} />
-        ))}
-      </div>
+      <PixiField state={state} onHit={onHit} />
+
+      {/* Speech bubble — hidden on end screens to avoid "Oh no..." appearing twice */}
+      {state.status === "playing" && state.bubble ? (
+        <div
+          className="tapko-bubble"
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "calc(50% - 90px)",
+            transform: "translateX(-50%)",
+            pointerEvents: "none",
+            zIndex: 10,
+          }}
+        >
+          {state.bubble}
+        </div>
+      ) : null}
 
       {state.status === "playing" ? (
         <Hud
@@ -82,7 +96,10 @@ export function ProtectTapko() {
 
       {state.status === "won" ? (
         <RewardScreen
-          code={REWARD_CODE}
+          rewardEnabled={businessConfig.rewardEnabled}
+          rewardText={businessConfig.rewardText}
+          reviewCallToAction={businessConfig.reviewCallToAction}
+          pleadingText={businessConfig.pleadingText}
           onPlayAgain={() => onStart(state.level)}
           onReviewClick={() => logEvent("review_link_clicked", { level: state.level })}
         />

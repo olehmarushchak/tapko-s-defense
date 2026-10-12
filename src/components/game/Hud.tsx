@@ -22,7 +22,7 @@ export function Hud({ levelLabel, hp, timeLeft, showHint }: HudProps) {
           ))}
         </span>
       </div>
-      <div className="tapko-timer">{Math.ceil(timeLeft)}s</div>
+      <div className="tapko-timer">{Math.ceil(timeLeft)}<span style={{ fontSize: '0.7em', fontWeight: 600, marginLeft: 2 }}>s</span></div>
       {showHint ? <div className="tapko-hint">Tap the wolves to fight them off</div> : null}
     </div>
   );

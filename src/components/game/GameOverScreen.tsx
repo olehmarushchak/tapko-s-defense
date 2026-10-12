@@ -5,9 +5,9 @@ interface GameOverScreenProps {
 
 export function GameOverScreen({ onRetry, onHome }: GameOverScreenProps) {
   return (
-    <div className="tapko-panel">
+    <div className="tapko-end-card">
       <h2 className="tapko-title">Oh no...</h2>
-      <p className="tapko-sub">The wolves got through this time. Tapko believes in a rematch.</p>
+      <p className="tapko-sub">The wolves got through. Tapko believes in a rematch.</p>
       <button type="button" className="tapko-btn" onClick={onRetry}>
         Try again
       </button>
