@@ -101,7 +101,10 @@ export function ProtectTapko() {
           reviewCallToAction={businessConfig.reviewCallToAction}
           pleadingText={businessConfig.pleadingText}
           onPlayAgain={() => onStart(state.level)}
-          onReviewClick={() => logEvent("review_link_clicked", { level: state.level })}
+          onReviewClick={() => {
+            logEvent("review_link_clicked", { level: state.level });
+            window.open(businessConfig.reviewUrl, "_blank", "noopener,noreferrer");
+          }}
         />
       ) : null}
 

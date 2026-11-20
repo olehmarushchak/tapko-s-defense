@@ -3,6 +3,8 @@ export interface BusinessConfig {
   rewardText: string;
   reviewCallToAction: string;
   pleadingText: string;
+  /** Google Maps / Google Business review URL for this client. */
+  reviewUrl: string;
 }
 
 // In production: populate from the NFC tag payload or a Supabase edge function.
@@ -12,4 +14,6 @@ export const businessConfig: BusinessConfig = {
   rewardText: '-5% off your next visit',
   reviewCallToAction: 'Tell them Tapko sent you!',
   pleadingText: 'Please leave us a review!',
+  // ← Replace with the client's Google Business review link
+  reviewUrl: 'https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review',
 };
