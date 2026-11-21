@@ -486,57 +486,27 @@
 }
 .tapko-pleading-mascot {
   position: absolute;
-  left: -104px;
-  bottom: 80px;
-  width: 320px;
-  height: 320px;
+  left: -50px;
+  bottom: 0;
+  width: 220px;
+  height: 220px;
   pointer-events: none;
   z-index: 1;
-  animation: tapko-pleading-entrance 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: tapko-pleading-entrance 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 .tapko-pleading-sprite {
-  width: 320px;
-  height: 320px;
+  width: 220px;
+  height: 220px;
   background-image: url('/assets/beg@2x.png');
-  background-size: 2560px 320px; /* 8 × 320px */
+  background-size: 1760px 220px; /* 8 × 220px */
   background-repeat: no-repeat;
   background-position: 0 0;
-  /* no delay — character animates while sliding in, which looks natural */
   animation: tapko-beg-sprite 1s steps(8) infinite;
-  /* flip horizontally so paws point right toward the button */
   transform: scaleX(-1);
-}
-.tapko-pleading-bubble {
-  /* floats above the mascot face; left keeps it on-screen despite left:-104px */
-  position: absolute;
-  bottom: calc(100% - 68px);
-  left: 160px;                /* card position: -104 + 160 = 56px from card left */
-  white-space: nowrap;
-  background: rgba(255, 255, 255, 0.96);
-  color: #2a1c00;
-  border-radius: 12px;
-  padding: 8px 14px;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.35;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.32);
-  pointer-events: none;
-  opacity: 0;
-  transform-origin: left center;
-  animation: tapko-bubble-appear 0.3s ease-out 0.7s forwards;
-}
-/* downward tail pointing toward mascot face */
-.tapko-pleading-bubble::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 18px;
-  border: 7px solid transparent;
-  border-top-color: rgba(255, 255, 255, 0.96);
 }
 @keyframes tapko-pleading-entrance {
   from {
-    transform: translateX(-440px) scale(0.38);
+    transform: translateX(-270px) scale(0.92);
     opacity: 0;
   }
   to {
@@ -546,11 +516,7 @@
 }
 @keyframes tapko-beg-sprite {
   from { background-position-x: 0; }
-  to   { background-position-x: -2560px; }
-}
-@keyframes tapko-bubble-appear {
-  from { opacity: 0; transform: scale(0.88); }
-  to   { opacity: 1; transform: scale(1);    }
+  to   { background-position-x: -1760px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

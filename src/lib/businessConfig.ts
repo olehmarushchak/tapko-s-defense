@@ -15,5 +15,5 @@ export const businessConfig: BusinessConfig = {
   reviewCallToAction: 'Tell them Tapko sent you!',
   pleadingText: 'Please leave us a review!',
   // ← Replace with the client's Google Business review link
-  reviewUrl: 'https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review',
+  reviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4',
 };

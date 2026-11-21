@@ -10,6 +10,20 @@ import {
   type LevelId,
 } from "@/lib/gameEngine";
 import { businessConfig } from "@/lib/businessConfig";
+
+// Tune difficulty without touching the pure-state-machine gameEngine.ts.
+// LEVELS is a mutable exported object — safe to patch at module load time.
+LEVELS.easy.spawnInterval = 0.75;   // wolf every ~0.75s
+LEVELS.easy.speedMin      = 11;
+LEVELS.easy.speedMax      = 17;
+LEVELS.easy.maxWolves     = 5;
+LEVELS.easy.duration      = 20;
+
+LEVELS.hard.spawnInterval = 0.38;   // wolf every ~0.38s
+LEVELS.hard.speedMin      = 18;
+LEVELS.hard.speedMax      = 27;
+LEVELS.hard.maxWolves     = 10;
+LEVELS.hard.duration      = 28;
 import { PixiField } from "./PixiField";
 import { Hud } from "./Hud";
 import { StartScreen } from "./StartScreen";
@@ -99,7 +113,6 @@ export function ProtectTapko() {
           rewardEnabled={businessConfig.rewardEnabled}
           rewardText={businessConfig.rewardText}
           reviewCallToAction={businessConfig.reviewCallToAction}
-          pleadingText={businessConfig.pleadingText}
           onPlayAgain={() => onStart(state.level)}
           onReviewClick={() => {
             logEvent("review_link_clicked", { level: state.level });

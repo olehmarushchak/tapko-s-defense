@@ -5,7 +5,6 @@ interface RewardScreenProps {
   rewardEnabled: boolean;
   rewardText: string;
   reviewCallToAction: string;
-  pleadingText: string;
   onReviewClick: () => void;
   onPlayAgain: () => void;
 }
@@ -14,7 +13,6 @@ export function RewardScreen({
   rewardEnabled,
   rewardText,
   reviewCallToAction,
-  pleadingText,
   onReviewClick,
   onPlayAgain,
 }: RewardScreenProps) {
@@ -27,9 +25,7 @@ export function RewardScreen({
 
   return (
     <div className="tapko-end-card">
-      {/* Mascot is absolutely positioned directly in the card so it never
-          participates in the flex layout — no squeezing, no layout collision */}
-      {reviewVisible && <PleadingMascot pleadingText={pleadingText} />}
+      {reviewVisible && <PleadingMascot />}
 
       <h2 className="tapko-title">We did it! 🎉</h2>
 
