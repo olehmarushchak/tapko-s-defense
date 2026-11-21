@@ -12,22 +12,24 @@ function getChipId(): string {
 }
 
 async function initSession(): Promise<void> {
-  const { data, error } = await supabase
+  // Generate UUID client-side so we don't need a SELECT policy on sessions.
+  const id = crypto.randomUUID();
+
+  const { error } = await supabase
     .from('sessions')
     .insert({
+      id,
       chip_id:    getChipId(),
       user_agent: navigator.userAgent,
       referrer:   document.referrer || null,
-    })
-    .select('id')
-    .single();
+    });
 
   if (error) {
     console.warn('[analytics] session init failed:', error.message);
     return;
   }
 
-  sessionId    = data.id;
+  sessionId    = id;
   sessionStart = Date.now();
 }
 
